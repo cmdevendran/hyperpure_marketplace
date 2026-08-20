@@ -14,7 +14,7 @@ const API_BASE_URL =
     ? `http://localhost:5000/api`
     : '/api';
 
-
+console.log("api base url "+API_BASE_URL)
 export default function App() {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(false);
