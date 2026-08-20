@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./  
+      dockerfile: Dockerfile
+    container_name: hyperpure_marketplace_app
+    ports:
+      - "8081:19006"
+    environment:
+      - NODE_ENV=development
+      - CI=true
+      # Ensure your backend service block in this file is named "api:" 
+      - API_URL=http://api:5000  
+    volumes:
+      # FIX: Mount the current directory where your app files actually live
+      - .:/app  
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+
+    networks:
+      - hyperpure-network  # <-- Assigning it here
+
+# CRITICAL: You must explicitly define the network down here at the root level!
+networks:
+  hyperpure-network:
+    driver: bridge
+

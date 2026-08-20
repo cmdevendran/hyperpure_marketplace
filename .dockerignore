@@ -1,0 +1,10 @@
+node_modules
+.expo
+.expo-shared
+web-build
+dist
+.git
+.gitignore
+npm-debug.log
+Dockerfile
+.dockerignore
