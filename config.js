@@ -9,7 +9,7 @@ const PORT = '5000';
 export const API_BASE_URL = Platform.select({
   // Web browser targets your local machine directly
   //web: `http://localhost:${PORT}/api/stocks`,
-  web: `http://${DEV_MACHINE_IP}:${PORT}/api/stocks`,
+  web: `/api/stocks`,
   
   // Android Emulator uses a dedicated internal gateway IP to access the host loopback
   android: `http://10.0.2.2:${PORT}/api/stocks`,
@@ -18,5 +18,6 @@ export const API_BASE_URL = Platform.select({
   ios: `http://${DEV_MACHINE_IP}:${PORT}/api/stocks`,
   
   // Fallback default
-  default: `http://${DEV_MACHINE_IP}:${PORT}/api/stocks`,
+  //default: `http://${DEV_MACHINE_IP}:${PORT}/api/stocks`,
+  default: `/api/stocks`,
 });
