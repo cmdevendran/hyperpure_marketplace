@@ -7,7 +7,13 @@ import ProductCard from './components/ProductCard';
 import CartModal from './components/CartModal';
 
 // Clean decoupled import configuration profiles
-import { API_BASE_URL } from './config'; 
+//import { API_BASE_URL } from './config'; 
+import {PORT} from './config'
+const API_BASE_URL =
+  process.env.NODE_ENV === 'development'
+    ? `http://localhost:5000/api`
+    : '/api';
+
 
 export default function App() {
   const [stocks, setStocks] = useState([]);
@@ -25,7 +31,7 @@ export default function App() {
     if (search) queryParams.append('search', search);
     if (category) queryParams.append('category_id', category);
 
-    fetch(`${API_BASE_URL}?${queryParams.toString()}`)
+    fetch(`${API_BASE_URL}/stocks?${queryParams.toString()}`)
       .then((res) => res.json())
       .then((json) => {
         if (json.success) {

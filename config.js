@@ -1,15 +1,18 @@
 // config.js
 import { Platform } from 'react-native';
 
+
 // Replace with your computer's local Wi-Fi IPv4 address for physical testing devices
 //const DEV_MACHINE_IP = 'hyperpure.petconnectnow.com';
  const DEV_MACHINE_IP = 'localhost'
 const PORT = '5000';
 
+
+
 export const API_BASE_URL = Platform.select({
   // Web browser targets your local machine directly
   //web: `http://localhost:${PORT}/api/stocks`,
-  web: `/api/stocks`,
+  web : process.env.EXPO_PUBLIC_API_BASE_URL ,
   
   // Android Emulator uses a dedicated internal gateway IP to access the host loopback
   android: `http://10.0.2.2:${PORT}/api/stocks`,
