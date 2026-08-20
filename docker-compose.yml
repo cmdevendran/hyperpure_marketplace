@@ -9,7 +9,7 @@ services:
       - /app/node_modules # <-- This anonymous volume protects the container's node_modules
 
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - EXPO_WEBPACK_ALLOWED_HOSTS=all
     command: npm run web:dev
 
@@ -27,7 +27,7 @@ services:
       - /home/arul/hyperpure_marketplace:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     command: node server.js
 
    

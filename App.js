@@ -8,13 +8,14 @@ import CartModal from './components/CartModal';
 
 // Clean decoupled import configuration profiles
 //import { API_BASE_URL } from './config'; 
-import {PORT} from './config'
-const API_BASE_URL = '/api'
-/*   process.env.NODE_ENV === 'development'
+console.log("node env "+process.env.NODE_ENV)
+const API_BASE_URL = 
+   process.env.NODE_ENV === 'development'
     ? `http://localhost:5000/api`
-    : '/api'; */
+    : '/api'; 
 
-console.log("api base url "+API_BASE_URL)
+console.log("api base url "+API_BASE_URL);
+
 export default function App() {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(false);
