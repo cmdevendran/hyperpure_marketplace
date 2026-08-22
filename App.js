@@ -165,7 +165,26 @@ const styles = StyleSheet.create({
   gridContainer: { padding: 12, alignItems: Platform.OS === 'web' ? 'flex-start' : 'stretch' },
   loader: { flex: 1, justifyContent: 'center' },
   emptyResults: { textAlign: 'center', marginTop: 40, color: '#777', fontSize: 14 },
-  footerBanner: { backgroundColor: '#1a1a1a', paddingVertical: 12, paddingHorizontal: 20, alignItems: 'center', borderTopWidth: 1, borderColor: '#e1e8ed' },
-  footerText: { color: '#ffd54f', fontSize: 13, fontWeight: '600', textAlign: 'center' },
-  footerEmail: { color: '#ffffff', fontSize: 13, textAlign: 'center', textDecorationLine: 'underline', marginTop: 4 }
+footerBanner: { 
+  backgroundColor: '#1a1a1a', 
+  paddingVertical: 12, 
+  paddingHorizontal: 20, 
+  alignItems: 'center', 
+  justifyContent: 'center',
+  borderTopWidth: 1, 
+  borderColor: '#e1e8ed',
+  width: '100%', // Ensures it spans across the screen
+},
+footerText: {
+  color: '#ffffff', 
+  textAlign: 'center',
+  marginBottom: 6,
+  flexShrink: 1, // Prevents text from pushing off screen layout bounds
+},
+footerEmail: {
+  color: '#1da1f2', // Give it a clear link color
+  textAlign: 'center',
+  flexShrink: 1,
+}
+ 
 });

@@ -9,7 +9,7 @@ services:
       - /app/node_modules # <-- This anonymous volume protects the container's node_modules
 
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=production #<-- Change this to production in production or development to work in local -->
       - EXPO_WEBPACK_ALLOWED_HOSTS=all
     command: npm run web:dev
 
