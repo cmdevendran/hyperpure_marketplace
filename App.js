@@ -6,6 +6,29 @@ import { useCartStore } from './store/useCartStore';
 import ProductCard from './components/ProductCard';
 import CartModal from './components/CartModal';
 
+const handleEmailPress = async () => {
+  const emailUrl = 'mailto:contactchatincorporated@gmail.com';
+  try {
+    // Check if the system can open the URL safely
+    const supported = await Linking.canOpenURL(emailUrl);
+    if (supported) {
+      await Linking.openURL(emailUrl);
+    } else {
+      // Fallback for desktop browsers where mailto apps aren't configured
+      if (Platform.OS === 'web') {
+        window.location.href = emailUrl;
+      }
+    }
+  } catch (error) {
+    console.error("Failed to open email link:", error);
+    // Ultimate fallback to prevent any application freeze
+    if (Platform.OS === 'web') {
+      window.location.href = emailUrl;
+    }
+  }
+};
+
+
 // Clean decoupled import configuration profiles
 //import { API_BASE_URL } from './config';
 console.log("node env "+process.env.NODE_ENV)
@@ -105,13 +128,25 @@ export default function App() {
           }
         />
       )}
-
-      <View style={styles.footerBanner}>
+{/* 
+ {      <View style={styles.footerBanner}>
         <Text style={styles.footerText}>This is not hyperpure by zomato.  If you intend to access hyperpure by Zomato, Kindly visit hyperpure.com instead.</Text>
         <TouchableOpacity onPress={() => Linking.openURL('mailto:contactchatincorporated@gmail.com')}>
           <Text style={styles.footerEmail}>For any enquiry contact us at contactchatincorporated@gmail.com</Text>
         </TouchableOpacity>
-      </View>
+      </View> } */}
+
+ <View style={styles.footerBanner}>
+  <Text style={styles.footerText}>
+    This is not hyperpure by zomato. If you intend to access hyperpure by Zomato, Kindly visit hyperpure.com instead.
+  </Text>
+  <TouchableOpacity onPress={handleEmailPress} activeOpacity={0.7}>
+    <Text style={styles.footerEmail}>
+      For any enquiry contact us at contactchatincorporated@gmail.com
+    </Text>
+  </TouchableOpacity>
+</View>
+
 
       <CartModal visible={cartOpen} onClose={() => setCartOpen(false)} />
     </SafeAreaView>
