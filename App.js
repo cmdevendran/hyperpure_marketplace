@@ -1,18 +1,18 @@
 // App.js
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TextInput, ActivityIndicator, Platform } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, TextInput, ActivityIndicator, Platform, Linking } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useCartStore } from './store/useCartStore';
 import ProductCard from './components/ProductCard';
 import CartModal from './components/CartModal';
 
 // Clean decoupled import configuration profiles
-//import { API_BASE_URL } from './config'; 
+//import { API_BASE_URL } from './config';
 console.log("node env "+process.env.NODE_ENV)
-const API_BASE_URL = 
+const API_BASE_URL =
    process.env.NODE_ENV === 'development'
     ? `http://localhost:5000/api`
-    : '/api'; 
+    : '/api';
 
 console.log("api base url "+API_BASE_URL);
 
@@ -20,7 +20,7 @@ export default function App() {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  
+
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
 
@@ -59,7 +59,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
-      
+
       <View style={styles.navbar}>
         <Text style={styles.logo}></Text>
         <TouchableOpacity style={styles.cartBadge} onPress={() => setCartOpen(true)}>
@@ -94,10 +94,10 @@ export default function App() {
           contentContainerStyle={styles.gridContainer}
           numColumns={Platform.OS === 'web' ? 3 : 1}
           renderItem={({ item }) => (
-            <ProductCard 
-              product={item} 
-              onAddToCart={addToCart} 
-              cartQuantity={getCartQuantity(item)} 
+            <ProductCard
+              product={item}
+              onAddToCart={addToCart}
+              cartQuantity={getCartQuantity(item)}
             />
           )}
           ListEmptyComponent={
@@ -105,6 +105,13 @@ export default function App() {
           }
         />
       )}
+
+      <View style={styles.footerBanner}>
+        <Text style={styles.footerText}>This is not hyperpure by zomato.  If you intend to access hyperpure by Zomato, Kindly visit hyperpure.com instead.</Text>
+        <TouchableOpacity onPress={() => Linking.openURL('mailto:contactchatincorporated@gmail.com')}>
+          <Text style={styles.footerEmail}>For any enquiry contact us at contactchatincorporated@gmail.com</Text>
+        </TouchableOpacity>
+      </View>
 
       <CartModal visible={cartOpen} onClose={() => setCartOpen(false)} />
     </SafeAreaView>
@@ -122,5 +129,8 @@ const styles = StyleSheet.create({
   inputField: { flex: 1, height: 40, borderWidth: 1, borderColor: '#ccc', borderRadius: 6, paddingHorizontal: 10, backgroundColor: '#f9f9f9' },
   gridContainer: { padding: 12, alignItems: Platform.OS === 'web' ? 'flex-start' : 'stretch' },
   loader: { flex: 1, justifyContent: 'center' },
-  emptyResults: { textAlign: 'center', marginTop: 40, color: '#777', fontSize: 14 }
+  emptyResults: { textAlign: 'center', marginTop: 40, color: '#777', fontSize: 14 },
+  footerBanner: { backgroundColor: '#1a1a1a', paddingVertical: 12, paddingHorizontal: 20, alignItems: 'center', borderTopWidth: 1, borderColor: '#e1e8ed' },
+  footerText: { color: '#ffd54f', fontSize: 13, fontWeight: '600', textAlign: 'center' },
+  footerEmail: { color: '#ffffff', fontSize: 13, textAlign: 'center', textDecorationLine: 'underline', marginTop: 4 }
 });
